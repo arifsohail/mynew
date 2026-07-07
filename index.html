@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Nadia!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #fff0f3, #ffccd5);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .card-container {
+            width: 360px;
+            height: 520px;
+            position: relative;
+            perspective: 1000px;
+        }
+        .page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 75, 110, 0.15);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+            pointer-events: none;
+            border: 1px solid rgba(255, 182, 193, 0.4);
+        }
+        .page.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+            z-index: 2;
+        }
+        .page.past {
+            opacity: 0;
+            transform: scale(0.9) translateY(-20px);
+        }
+        h1 {
+            color: #c9184a;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        p {
+            color: #5c5457;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+        .heart {
+            color: #ff4d6d;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        button {
+            background: linear-gradient(135deg, #ff758f, #ff4d6d);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card-container">
+    <!-- PAGE 1: COVER -->
+    <div class="page active" id="page1">
+        <div class="heart">🌹</div>
+        <h1>Happy Birthday, Nadia</h1>
+        <p>To the most beautiful and incredible girl in my world. I made a little something just for you. Tap below to open it.</p>
+        <button onclick="nextPage(1)">Open My Heart ✨</button>
+    </div>
+
+    <!-- PAGE 2: MESSAGE 1 -->
+    <div class="page" id="page2">
+        <h1>My Favorite Smile</h1>
+        <p>Nadia, every single day with you feels like a gift. Your smile completely brightens my darkest days, and your laugh is easily my favorite sound in the world.</p>
+        <button onclick="nextPage(2)">Next Page 👉</button>
+    </div>
+
+    <!-- PAGE 3: MESSAGE 2 -->
+    <div class="page" id="page3">
+        <h1>Thank You for Being You</h1>
+        <p>Thank you for your warmth, your kindness, and for bringing so much color into my life. I appreciate you more than words could ever describe.</p>
+        <button onclick="nextPage(3)">One More Page 💖</button>
+    </div>
+
+    <!-- PAGE 4: CLOSING -->
+    <div class="page" id="page4">
+        <div class="heart">💝</div>
+        <h1>Forever & Always</h1>
+        <p>May this year bring you endless happiness, beautiful surprises, and everything your heart desires. I love you, Nadia. Happy Birthday!</p>
+        <button onclick="resetCard()">Read Again 🔄</button>
+    </div>
+</div>
+
+<script>
+    function nextPage(currentPageNum) {
+        const current = document.getElementById(`page${currentPageNum}`);
+        const next = document.getElementById(`page${currentPageNum + 1}`);
+        
+        if (current && next) {
+            current.classList.remove('active');
+            current.classList.add('past');
+            next.classList.add('active');
+        }
+    }
+
+    function resetCard() {
+        const pages = document.querySelectorAll('.page');
+        pages.forEach((page, index) => {
+            page.classList.remove('active', 'past');
+            if (index === 0) {
+                page.classList.add('active');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
